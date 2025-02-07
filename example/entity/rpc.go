@@ -1,4 +1,4 @@
-package example
+package entity
 
 type Request struct {
 	ReqId    string
@@ -9,10 +9,9 @@ type Request struct {
 }
 
 type Doc struct {
-	Typ   string
-	ID    string
-	Score float64
-	Sigs  string
+	Title  string
+	Author string
+	Text   string
 }
 
 type Response struct {

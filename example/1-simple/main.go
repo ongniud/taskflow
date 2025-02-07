@@ -4,16 +4,16 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"github.com/ongniud/taskflow/example/ops"
 	"log"
 
 	"github.com/ongniud/taskflow"
 	"github.com/ongniud/taskflow/example/utils"
-	"github.com/ongniud/taskflow/operator"
 	"github.com/ongniud/taskflow/tfctx"
 )
 
 func main() {
-	if err := operator.Init(); err != nil {
+	if err := ops.Init(); err != nil {
 		log.Fatal(err)
 	}
 

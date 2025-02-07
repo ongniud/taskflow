@@ -3,6 +3,7 @@ package tfctx
 import (
 	"context"
 	"fmt"
+	"log"
 	"strings"
 	"sync/atomic"
 	"time"
@@ -12,17 +13,6 @@ import (
 )
 
 const (
-	NodeStageInit    = 0
-	NodeStagePrepare = 1
-
-	NodeStateInit    = 0
-	NodeStateRunning = 0
-	NodeStateEnd     = 0
-	NodeStateAbort   = 0
-	NodeStateFail    = 0
-
-	NodeFlagPruned = 0
-
 	NodeStatusInit    = 0
 	NodeStatusPrepare = 1
 	NodeStatusRunning = 2
@@ -50,9 +40,6 @@ type NodeCtx struct {
 	SubGrh *graph.Graph
 
 	// Runtime
-	//
-	// 这里存储的 TaskCtx 而非 Task ，因为 Task 是一个运行引擎，用于驱动流程运转；
-	// NodeCtx 本身是一个节点状态中心，而 TaskCtx 是任务的状态中心，节点状态引用任务的状态是合理的，引用一个 Task是不合理的。
 	tc *TaskCtx
 
 	// Status
@@ -107,8 +94,6 @@ func (c *NodeCtx) GetTaskCtx() *TaskCtx {
 }
 
 func (c *NodeCtx) SetOutputs(outputs map[string]any) {
-	//outputsStr, _ := json.Marshal(outputs)
-	//log.Printf("node[%s] SetOutputs:%s\n", c.Node.Name, string(outputsStr))
 	fields := make([]*model.FieldData, len(c.Node.Outputs))
 	for i, output := range c.Node.Outputs {
 		field := output.Mapping
@@ -118,7 +103,7 @@ func (c *NodeCtx) SetOutputs(outputs map[string]any) {
 
 		val, ok := outputs[field]
 		if !ok {
-			fmt.Printf("node[%s.%s] output field lost: idx=%d, name=%s\n", c.Graph.Name, c.Node.Name, i, output.Name)
+			log.Printf("node[%s.%s] output field lost: idx=%d, name=%s\n", c.Graph.Name, c.Node.Name, i, output.Name)
 			continue
 		}
 		fields[i] = &model.FieldData{
@@ -127,7 +112,7 @@ func (c *NodeCtx) SetOutputs(outputs map[string]any) {
 				Val: val,
 			},
 		}
-		fmt.Printf("node[%s.%s] output field found: idx=%d, name=%s, value=%v\n", c.Graph.Name, c.Node.Name, i, output.Name, val)
+		log.Printf("node[%s.%s] output field found: idx=%d, name=%s, value=%v\n", c.Graph.Name, c.Node.Name, i, output.Name, val)
 	}
 	c.Outputs = fields
 	c.ManualOutput = true

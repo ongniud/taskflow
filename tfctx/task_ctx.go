@@ -21,7 +21,8 @@ import (
 
 type TaskCtx struct {
 	// Base
-	g *graph.Graph
+	fc *FlowCtx
+	g  *graph.Graph
 
 	// Argument
 	inputs  map[string]any
@@ -47,8 +48,6 @@ type TaskCtx struct {
 }
 
 func NewTaskContext(ctx model.IFlowContext, g *graph.Graph) (*TaskCtx, error) {
-	// TODO:
-	// 这里感觉可以把 flow context 匿名包含起来，后面要梳理一下相互关系，很乱
 	tc := &TaskCtx{
 		g:       g,
 		inputs:  make(map[string]any),

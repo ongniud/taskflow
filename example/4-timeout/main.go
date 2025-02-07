@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"github.com/ongniud/taskflow/example/ops"
 	"io"
 	"log"
 	"os"
@@ -11,16 +12,15 @@ import (
 	"github.com/ongniud/taskflow"
 	"github.com/ongniud/taskflow/model/config"
 	"github.com/ongniud/taskflow/model/graph"
-	"github.com/ongniud/taskflow/operator"
 	"github.com/ongniud/taskflow/tfctx"
 )
 
 func main() {
-	if err := operator.Init(); err != nil {
+	if err := ops.Init(); err != nil {
 		log.Fatal(err)
 	}
 
-	file, err := os.Open("/Users/jianweili/go/src/github.com/blastbao/taskflow/example/sequence/graph.json")
+	file, err := os.Open("/Users/jianweili/go/src/github.com/ongniud/taskflow/example/sequence/graph.json")
 	if err != nil {
 		log.Fatalf("无法打开文件: %v", err)
 	}
@@ -47,12 +47,12 @@ func main() {
 	}
 
 	flow := tfctx.NewFlowCtx(context.Background()).
-		WithInputs(map[any]any{
+		WithInputs(map[string]any{
 			"uid":     13579,
 			"age":     18,
 			"country": "china",
 		}).
-		WithParams(map[any]any{})
+		WithParams(map[string]any{})
 	if err := task.Run(flow); err != nil {
 		log.Fatal(err)
 	}

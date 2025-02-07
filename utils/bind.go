@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-func BindInputs(op any, inputs map[any]any) error {
+func BindInputs(op any, inputs map[string]any) error {
 	if op == nil {
 		return errors.New("op is nil")
 	}
@@ -67,7 +67,7 @@ func BindInputs(op any, inputs map[any]any) error {
 	return nil
 }
 
-func BindOutputs(op any) (map[any]any, error) {
+func BindOutputs(op any) (map[string]any, error) {
 	if op == nil {
 		return nil, errors.New("op is nil")
 	}
@@ -80,7 +80,7 @@ func BindOutputs(op any) (map[any]any, error) {
 	opType := opValue.Type()
 
 	argsValue, argsType := getTargetField(opValue, opType, "args")
-	outputs := make(map[any]any)
+	outputs := make(map[string]any)
 	for i := 0; i < argsType.NumField(); i++ {
 		field := argsType.Field(i)
 		tags := strings.Split(field.Tag.Get("tf"), ",")

@@ -12,11 +12,7 @@ var (
 	builders sync.Map
 )
 
-// TODO:
-// comments:
-// why we need builder here, because op is state relate and not reusable, each execute need new one.
-// is we add a reset here maybe can reuse it?
-
+// OpBuilder why we need builder here, because op is state relate and not reusable, each execute need new one.
 type OpBuilder func(node *config.Node) (model.IOperator, error)
 
 func RegisterOpBuilder(op string, builder OpBuilder) error {

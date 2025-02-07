@@ -1,35 +1,34 @@
-package operator
+package ops
 
 import (
 	"github.com/ongniud/taskflow/model"
 	"github.com/ongniud/taskflow/model/config"
-	"github.com/ongniud/taskflow/operator/ops"
 	reg "github.com/ongniud/taskflow/registry"
 )
 
 func Init() error {
 	if err := reg.RegisterOpBuilder("debug", func(node *config.Node) (model.IOperator, error) {
-		return &ops.Debug{}, nil
+		return &Debug{}, nil
 	}); err != nil {
 		return err
 	}
 	if err := reg.RegisterOpBuilder("request", func(node *config.Node) (model.IOperator, error) {
-		return &ops.Request{}, nil
+		return &Request{}, nil
 	}); err != nil {
 		return err
 	}
 	if err := reg.RegisterOpBuilder("response", func(node *config.Node) (model.IOperator, error) {
-		return &ops.Response{}, nil
+		return &Response{}, nil
 	}); err != nil {
 		return err
 	}
 	if err := reg.RegisterOpBuilder("SubGraphRequest", func(node *config.Node) (model.IOperator, error) {
-		return &ops.SubGraphRequest{}, nil
+		return &SubGraphRequest{}, nil
 	}); err != nil {
 		return err
 	}
 	if err := reg.RegisterOpBuilder("SubGraphResponse", func(node *config.Node) (model.IOperator, error) {
-		return &ops.SubGraphResponse{}, nil
+		return &SubGraphResponse{}, nil
 	}); err != nil {
 		return err
 	}
