@@ -1,0 +1,64 @@
+{
+  "name": "graph",
+  "nodes": [
+    {
+      "name": "req",
+      "kind": "operator",
+      "operator": "request",
+      "outputs": [
+        {
+          "name": "req.ReqId"
+        },
+        {
+          "name": "req.Scene"
+        },
+        {
+          "name": "req.Country"
+        },
+        {
+          "name": "req.DeviceID"
+        },
+        {
+          "name": "req.Uid"
+        }
+      ]
+    },
+    {
+      "name": "proc",
+      "kind": "operator",
+      "operator": "process",
+      "inputs": [
+        {
+          "name": "req.ReqId"
+        },
+        {
+          "name": "req.Scene"
+        },
+        {
+          "name": "req.Country"
+        },
+        {
+          "name": "req.DeviceID"
+        },
+        {
+          "name": "req.Uid"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "identity"
+        }
+      ]
+    },
+    {
+      "name": "rsp",
+      "kind": "operator",
+      "operator": "response",
+      "inputs": [
+        {
+          "name": "identity"
+        }
+      ]
+    }
+  ]
+}

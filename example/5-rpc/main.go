@@ -7,7 +7,8 @@ import (
 	"log"
 
 	"github.com/ongniud/taskflow"
-	"github.com/ongniud/taskflow/example/1-simple/ops"
+	"github.com/ongniud/taskflow/example/5-rpc/entity"
+	"github.com/ongniud/taskflow/example/5-rpc/ops"
 	"github.com/ongniud/taskflow/example/utils"
 	"github.com/ongniud/taskflow/tfctx"
 )
@@ -17,7 +18,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	g, err := utils.LoadGraph("/Users/jianweili/go/src/github.com/ongniud/taskflow/example/1-simple/graph.json")
+	g, err := utils.LoadGraph("/Users/jianweili/go/src/github.com/ongniud/taskflow/example/5-rpc/graph.json")
 	if err != nil {
 		log.Fatalf("读取文件内容失败: %v", err)
 	}
@@ -29,17 +30,22 @@ func main() {
 
 	flow := tfctx.NewFlowCtx(context.Background()).
 		WithInputs(map[string]any{
-			"uid":     13579,
-			"age":     18,
-			"country": "china",
-		}).
-		WithParams(map[string]any{})
+			"request": &entity.Request{
+				ReqId:    "123456789",
+				Scene:    "landing",
+				Country:  "America",
+				Uid:      101,
+				DeviceID: "KE-AS-D1A23-BBD",
+			},
+		})
 	if err := task.Run(flow); err != nil {
 		log.Fatal(err)
 	}
 
 	outputs := flow.GetOutputs()
-	outputsStr, _ := json.Marshal(outputs)
-	fmt.Println("outputs:", string(outputsStr))
+
+	response := outputs["response"]
+	responseStr, _ := json.Marshal(response)
+	fmt.Println("response:", string(responseStr))
 	//task.tc.Render()
 }

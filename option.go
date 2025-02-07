@@ -5,8 +5,7 @@ import (
 )
 
 const (
-	// DefaultPoolSize is the default pool size.
-	DefaultPoolSize = 10
+	DefaultPoolSize = 10 // default pool size.
 )
 
 type TaskOptions struct {

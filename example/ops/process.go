@@ -8,9 +8,14 @@ import (
 	"github.com/ongniud/taskflow/model"
 )
 
-type Request struct{}
+type Process struct{}
 
-func (op *Request) Execute(ctx model.IOpContext) error {
+func (op *Process) Execute(ctx model.IOpContext) error {
+
+	inputs := ctx.GetInputs()
+	inputsStr, _ := json.Marshal(inputs)
+	fmt.Println("req:", string(inputsStr))
+
 	request, ok := ctx.GetGraphInputs()["request"]
 	if !ok {
 		return fmt.Errorf("request not exist")
@@ -24,8 +29,6 @@ func (op *Request) Execute(ctx model.IOpContext) error {
 		return fmt.Errorf("request is invalid")
 	}
 
-	reqStr, _ := json.Marshal(req)
-	fmt.Println("req:", string(reqStr))
 	ctx.SetParam("request", req)
 
 	ctx.SetOutputs(map[string]any{

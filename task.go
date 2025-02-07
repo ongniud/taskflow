@@ -115,7 +115,7 @@ func (e *Task) runNode(tc *tfctx.TaskCtx, nc *tfctx.NodeCtx) {
 	}
 
 	if nc.Status != tfctx.NodeStatusInit {
-		log.Println("nc.Status != tfcontext.NodeStatusInit", nc.Status)
+		log.Println("nc.Status != tfctx.NodeStatusInit", nc.Status)
 		return
 	}
 

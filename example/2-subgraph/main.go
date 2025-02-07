@@ -4,10 +4,10 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"github.com/ongniud/taskflow/example/ops"
 	"log"
 
 	"github.com/ongniud/taskflow"
+	"github.com/ongniud/taskflow/example/2-subgraph/ops"
 	"github.com/ongniud/taskflow/example/utils"
 	"github.com/ongniud/taskflow/registry"
 	"github.com/ongniud/taskflow/tfctx"
