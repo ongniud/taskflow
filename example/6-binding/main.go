@@ -17,9 +17,9 @@ func main() {
 		log.Fatal(err)
 	}
 
-	g, err := utils.LoadGraph("/Users/jianweili/go/src/github.com/ongniud/taskflow/example/6-binding/graph.json")
+	g, err := utils.LoadGraph("example/6-binding/graph.json")
 	if err != nil {
-		log.Fatalf("读取文件内容失败: %v", err)
+		log.Fatalf("load graph failed: %v", err)
 	}
 
 	task, err := taskflow.NewTask(taskflow.WithGraph(g))

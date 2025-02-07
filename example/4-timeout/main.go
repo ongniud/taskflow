@@ -4,14 +4,11 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"github.com/ongniud/taskflow/example/ops"
-	"io"
 	"log"
-	"os"
 
 	"github.com/ongniud/taskflow"
-	"github.com/ongniud/taskflow/model/config"
-	"github.com/ongniud/taskflow/model/graph"
+	"github.com/ongniud/taskflow/example/ops"
+	"github.com/ongniud/taskflow/example/utils"
 	"github.com/ongniud/taskflow/tfctx"
 )
 
@@ -20,28 +17,12 @@ func main() {
 		log.Fatal(err)
 	}
 
-	file, err := os.Open("/Users/jianweili/go/src/github.com/ongniud/taskflow/example/sequence/graph.json")
+	g, err := utils.LoadGraph("example/1-simple/graph.json")
 	if err != nil {
-		log.Fatalf("无法打开文件: %v", err)
-	}
-	defer file.Close()
-
-	content, err := io.ReadAll(file)
-	if err != nil {
-		log.Fatalf("读取文件内容失败: %v", err)
+		log.Fatalf("load graph failed: %v", err)
 	}
 
-	var cfg config.Graph
-	if err = json.Unmarshal(content, &cfg); err != nil {
-		log.Fatalf("反序列化失败: %v", err)
-	}
-
-	gra, err := graph.NewGraph(&cfg)
-	if err != nil {
-		log.Fatalf("new graph fail: %v", err)
-	}
-
-	task, err := taskflow.NewTask(taskflow.WithGraph(gra))
+	task, err := taskflow.NewTask(taskflow.WithGraph(g))
 	if err != nil {
 		log.Fatal(err)
 	}

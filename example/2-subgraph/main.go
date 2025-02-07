@@ -17,24 +17,24 @@ func main() {
 	if err := ops.Init(); err != nil {
 		log.Fatal(err)
 	}
-	subGra1, err := utils.LoadGraph("/Users/jianweili/go/src/github.com/ongniud/taskflow/example/2-subgraph/graph1.json")
+	subGra1, err := utils.LoadGraph("example/2-subgraph/graph1.json")
 	if err != nil {
-		log.Fatalf("读取文件内容失败: %v", err)
+		log.Fatalf("load graph failed: %v", err)
 	}
-	subGra2, err := utils.LoadGraph("/Users/jianweili/go/src/github.com/ongniud/taskflow/example/2-subgraph/graph2.json")
+	subGra2, err := utils.LoadGraph("example/2-subgraph/graph2.json")
 	if err != nil {
-		log.Fatalf("读取文件内容失败: %v", err)
+		log.Fatalf("load graph failed: %v", err)
 	}
 	if err := registry.RegisterGraph(subGra1); err != nil {
-		log.Fatalf("读取文件内容失败: %v", err)
+		log.Fatalf("register graph failed: %v", err)
 	}
 	if err := registry.RegisterGraph(subGra2); err != nil {
-		log.Fatalf("读取文件内容失败: %v", err)
+		log.Fatalf("register graph failed: %v", err)
 	}
 
-	g, err := utils.LoadGraph("/Users/jianweili/go/src/github.com/ongniud/taskflow/example/2-subgraph/graph.json")
+	g, err := utils.LoadGraph("example/2-subgraph/graph.json")
 	if err != nil {
-		log.Fatalf("读取文件内容失败: %v", err)
+		log.Fatalf("load graph failed: %v", err)
 	}
 	task, err := taskflow.NewTask(taskflow.WithGraph(g))
 	if err != nil {
