@@ -1,0 +1,139 @@
+{
+  "name": "subgraph-1",
+  "nodes": [
+    {
+      "name": "start",
+      "kind": "operator",
+      "operator": "debug",
+      "param": "{\"s1\":1,\"s2\":2,\"s3\":3}",
+      "outputs": [
+        {
+          "name": "s1",
+          "mapping": "s1"
+        },
+        {
+          "name": "s2",
+          "mapping": "s2"
+        },
+        {
+          "name": "s3",
+          "mapping": "s3"
+        }
+      ]
+    },
+    {
+      "name": "middle-a",
+      "kind": "operator",
+      "operator": "debug",
+      "param": "{\"m1\":1,\"m2\":2,\"m3\":3}",
+      "inputs": [
+        {
+          "name": "s1",
+          "mapping": "s1"
+        },
+        {
+          "name": "s2",
+          "mapping": "s2"
+        },
+        {
+          "name": "s3",
+          "mapping": "s3"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "m1",
+          "mapping": "m1"
+        },
+        {
+          "name": "m2",
+          "mapping": "m2"
+        },
+        {
+          "name": "m3",
+          "mapping": "m3"
+        }
+      ]
+    },
+    {
+      "name": "middle-b",
+      "kind": "operator",
+      "operator": "debug",
+      "param": "{\"m4\":1,\"m5\":2,\"m6\":3}",
+      "inputs": [
+        {
+          "name": "s1",
+          "mapping": "s1"
+        },
+        {
+          "name": "s2",
+          "mapping": "s2"
+        },
+        {
+          "name": "s3",
+          "mapping": "s3"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "m4",
+          "mapping": "m4"
+        },
+        {
+          "name": "m5",
+          "mapping": "m5"
+        },
+        {
+          "name": "m6",
+          "mapping": "m6"
+        }
+      ]
+    },
+    {
+      "name": "end",
+      "kind": "operator",
+      "operator": "debug",
+      "param": "{\"e1\":1,\"e2\":2,\"e3\":3}",
+      "inputs": [
+        {
+          "name": "m1",
+          "mapping": "m1"
+        },
+        {
+          "name": "m2",
+          "mapping": "m2"
+        },
+        {
+          "name": "m3",
+          "mapping": "m3"
+        },
+        {
+          "name": "m4",
+          "mapping": "m4"
+        },
+        {
+          "name": "m5",
+          "mapping": "m5"
+        },
+        {
+          "name": "m6",
+          "mapping": "m6"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "e1",
+          "mapping": "e1"
+        },
+        {
+          "name": "e2",
+          "mapping": "e2"
+        },
+        {
+          "name": "e3",
+          "mapping": "e3"
+        }
+      ]
+    }
+  ]
+}
