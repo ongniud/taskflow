@@ -1,0 +1,58 @@
+{
+  "name": "graph",
+  "nodes": [
+    {
+      "name": "start",
+      "kind": "operator",
+      "operator": "start",
+      "outputs": [
+        {
+          "name": "request_id"
+        },
+        {
+          "name": "user_id"
+        },
+        {
+          "name": "session_ids"
+        },
+        {
+          "name": "host_ids"
+        }
+      ]
+    },
+    {
+      "name": "binding",
+      "kind": "operator",
+      "operator": "binding",
+      "inputs": [
+        {
+          "name": "request_id"
+        },
+        {
+          "name": "user_id"
+        },
+        {
+          "name": "session_ids"
+        },
+        {
+          "name": "host_ids"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "identity"
+        }
+      ]
+    },
+    {
+      "name": "end",
+      "kind": "operator",
+      "operator": "end",
+      "inputs": [
+        {
+          "name": "identity"
+        }
+      ]
+    }
+  ]
+}
