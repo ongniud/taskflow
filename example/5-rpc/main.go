@@ -47,5 +47,5 @@ func main() {
 	response := outputs["response"]
 	responseStr, _ := json.Marshal(response)
 	fmt.Println("response:", string(responseStr))
-	//task.tc.Render()
+	task.Render("example/5-rpc/graph.dot")
 }

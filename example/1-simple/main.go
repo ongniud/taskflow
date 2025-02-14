@@ -4,12 +4,11 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"log"
-
 	"github.com/ongniud/taskflow"
 	"github.com/ongniud/taskflow/example/1-simple/ops"
 	"github.com/ongniud/taskflow/example/utils"
 	"github.com/ongniud/taskflow/tfctx"
+	"log"
 )
 
 func main() {
@@ -41,5 +40,5 @@ func main() {
 	outputs := flow.GetOutputs()
 	outputsStr, _ := json.Marshal(outputs)
 	fmt.Println("outputs:", string(outputsStr))
-	task.Render()
+	task.Render("example/1-simple/graph.dot")
 }

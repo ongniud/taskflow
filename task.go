@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"github.com/goccy/go-graphviz"
 	"log"
+	"os"
 	"time"
 
 	"github.com/ongniud/taskflow/model"
@@ -323,8 +324,9 @@ func (e *Task) Ctx() *tfctx.TaskCtx {
 	return e.tc
 }
 
-func (e *Task) Render() {
+func (e *Task) Render(file string) {
 	g, _ := graphviz.New(context.Background())
+	g.SetLayout(graphviz.DOT)
 	graph, err := g.Graph()
 	if err != nil {
 		log.Fatal(err)
@@ -333,7 +335,18 @@ func (e *Task) Render() {
 	if err := vis.Viz(e.tc, graph); err != nil {
 		log.Fatal(err)
 	}
-	if err := g.RenderFilename(context.Background(), graph, graphviz.PNG, "output.png"); err != nil {
-		log.Fatal(err)
+	f, err := os.Create(file)
+	if err != nil {
+		log.Fatalf("failed to create file: %v", err)
 	}
+	defer f.Close()
+	if err := g.Render(context.Background(), graph, graphviz.XDOT, f); err != nil {
+		log.Fatalf("failed to render graph: %v", err)
+	}
+	//if err := g.RenderFilename(context.Background(), graph, graphviz.JPG, "output.jpg"); err != nil {
+	//	log.Fatal(err)
+	//}
+	//if err := g.RenderFilename(context.Background(), graph, graphviz.XDOT, "output.dot"); err != nil {
+	//	log.Fatal(err)
+	//}
 }

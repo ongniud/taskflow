@@ -55,5 +55,5 @@ func main() {
 	outputs := flow.GetOutputs()
 	outputsStr, _ := json.Marshal(outputs)
 	fmt.Println("outputs:", string(outputsStr))
-	task.Render()
+	task.Render("example/2-subgraph/graph.dot")
 }

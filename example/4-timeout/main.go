@@ -7,15 +7,14 @@ import (
 	"log"
 
 	"github.com/ongniud/taskflow"
-	"github.com/ongniud/taskflow/example/ops"
 	"github.com/ongniud/taskflow/example/utils"
 	"github.com/ongniud/taskflow/tfctx"
 )
 
 func main() {
-	if err := ops.Init(); err != nil {
-		log.Fatal(err)
-	}
+	//if err := ops.Init(); err != nil {
+	//	log.Fatal(err)
+	//}
 
 	g, err := utils.LoadGraph("example/1-simple/graph.json")
 	if err != nil {
@@ -41,5 +40,5 @@ func main() {
 	outputs := flow.GetOutputs()
 	outputsStr, _ := json.Marshal(outputs)
 	fmt.Println("outputs:", string(outputsStr))
-	//task.tc.Render()
+	task.Render("example/1-simple/graph.dot")
 }
