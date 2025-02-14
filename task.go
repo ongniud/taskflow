@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"github.com/goccy/go-graphviz"
 	"log"
 	"time"
 
@@ -320,4 +321,19 @@ func (e *Task) getNodeInputs(ec *tfctx.TaskCtx, nc *tfctx.NodeCtx) ([]*model.Fie
 
 func (e *Task) Ctx() *tfctx.TaskCtx {
 	return e.tc
+}
+
+func (e *Task) Render() {
+	g, _ := graphviz.New(context.Background())
+	graph, err := g.Graph()
+	if err != nil {
+		log.Fatal(err)
+	}
+	vis := NewVisualizer()
+	if err := vis.Viz(e.tc, graph); err != nil {
+		log.Fatal(err)
+	}
+	if err := g.RenderFilename(context.Background(), graph, graphviz.PNG, "output.png"); err != nil {
+		log.Fatal(err)
+	}
 }

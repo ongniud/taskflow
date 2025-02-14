@@ -41,5 +41,5 @@ func main() {
 	outputs := flow.GetOutputs()
 	outputsStr, _ := json.Marshal(outputs)
 	fmt.Println("outputs:", string(outputsStr))
-	//task.tc.Render()
+	task.Render()
 }
