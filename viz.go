@@ -119,7 +119,6 @@ func (v *Visualizer) createEdges(taskCtx *tfctx.TaskCtx, vzg *cgraph.Graph, gvzN
 	return nil
 }
 
-// createEdge 创建边
 func (v *Visualizer) createEdge(vzg *cgraph.Graph, from, to *cgraph.Node, label string) error {
 	edge, err := vzg.CreateEdgeByName("", from, to)
 	if err != nil {
